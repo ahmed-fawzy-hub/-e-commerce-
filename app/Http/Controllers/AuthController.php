@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeEmail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -56,9 +57,12 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        Mail::to($user->email)->send(new WelcomeEmail);
+        // Mail::to($user->email)->send(new WelcomeEmail);
+        event(new Registered($user));
 
-        return redirect('/');
+
+        return redirect()->route('verification.notice');
+        // return redirect('/');
     }
 
     public function logout(Request $request)

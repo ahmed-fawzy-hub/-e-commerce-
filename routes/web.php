@@ -4,7 +4,11 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +19,31 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('login.stor
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'store'])->name('register.store')->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/email/verify', function () {
+    return view('Auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/products');
+})->name('verification.verify');
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'verification link sent');
+})->name('verification.send');
+
+
+
+
+
+
+
 
 Route::prefix('brands')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/', [BrandController::class, 'index'])->middleware(['throttle:20,1']);
