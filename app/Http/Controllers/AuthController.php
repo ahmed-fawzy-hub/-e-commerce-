@@ -60,7 +60,6 @@ class AuthController extends Controller
         // Mail::to($user->email)->send(new WelcomeEmail);
         event(new Registered($user));
 
-
         return redirect()->route('verification.notice');
         // return redirect('/');
     }

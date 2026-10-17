@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -52,7 +51,7 @@ class WelcomeEmail extends Mailable
         return [
             Attachment::fromPath(storage_path('app/private/invoice.pdf'))
                 ->as('Your Monthly Invoice')
-                ->withMime('application/pdf')
+                ->withMime('application/pdf'),
         ];
     }
 }

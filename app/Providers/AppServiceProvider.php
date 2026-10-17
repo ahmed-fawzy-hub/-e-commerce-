@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -43,9 +42,8 @@ class AppServiceProvider extends ServiceProvider
                 // ->line('If you did not create an account, no furthur action is required.')
                 ->view('emails.custom-verify', [
                     'user' => $notifiable,
-                    'url' => $url
-                ])
-            ;
+                    'url' => $url,
+                ]);
         });
     }
 }

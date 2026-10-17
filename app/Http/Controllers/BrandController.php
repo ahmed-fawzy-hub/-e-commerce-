@@ -15,9 +15,10 @@ class BrandController extends Controller
         $brands = Brand::when($request->search_field, function ($query) use ($request) {
             return $query->whereAny([
                 'name',
-                'slug'
-            ], 'like', '%' . $request->search_field . '%');
+                'slug',
+            ], 'like', '%'.$request->search_field.'%');
         })->paginate(20);
+
         return view('brands.index', compact('brands'));
     }
 
@@ -32,7 +33,7 @@ class BrandController extends Controller
             $path = $request->file('image')->store('brands', 'public');
         }
 
-        $item = new Brand();
+        $item = new Brand;
         $item->name = $request->name;
         $item->slug = $request->slug;
         $item->image = $path;
@@ -51,6 +52,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::where('id', $id)->first();
+
         return view('brands.edit', compact('brand'));
     }
 
@@ -81,7 +83,6 @@ class BrandController extends Controller
         if ($brand->image) {
             Storage::disk('public')->delete($brand->image);
         }
-
 
         $brand->delete();
 

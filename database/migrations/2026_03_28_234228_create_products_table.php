@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->decimal('regular_price',10,2);
-            $table->decimal('sale_price',10,2)->nullable();
+            $table->decimal('regular_price', 10, 2);
+            $table->decimal('sale_price', 10, 2)->nullable();
             $table->string('sku')->nullable();
             $table->integer('stock_quantity')->nullable();
-            $table->enum('stock_status',['instock','outofstock'])->default('instock');
+            $table->enum('stock_status', ['instock', 'outofstock'])->default('instock');
             $table->string('featured')->default('no');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();

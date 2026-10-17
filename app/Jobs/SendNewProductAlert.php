@@ -27,7 +27,7 @@ class SendNewProductAlert implements ShouldQueue
     {
         //
         $users = User::all();
-        foreach ($users as  $user) {
+        foreach ($users as $user) {
             Mail::to($user->email)->send(new AddNewProductMail);
         }
     }

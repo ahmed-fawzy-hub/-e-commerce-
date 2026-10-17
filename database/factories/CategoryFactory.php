@@ -20,9 +20,9 @@ class CategoryFactory extends Factory
     {
         return [
             //
-            'name'=>$this->faker->name(),
-            'slug'=>Str::slug($this->faker->unique()->name()),
-            'image'=>'https://picsum.photos/640/480'
+            'name' => $this->faker->name(),
+            'slug' => Str::slug($this->faker->unique()->name()),
+            'image' => 'https://picsum.photos/640/480',
         ];
     }
 }

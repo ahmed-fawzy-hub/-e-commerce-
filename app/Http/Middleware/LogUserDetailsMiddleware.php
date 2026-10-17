@@ -26,6 +26,7 @@ class LogUserDetailsMiddleware
         //     'user_id' => Auth::check() ? Auth::user()->id : '',
         // ]);
         Log::info('from global middleware');
+
         return $next($request);
     }
 }

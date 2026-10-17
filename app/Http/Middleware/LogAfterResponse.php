@@ -32,8 +32,6 @@ class LogAfterResponse
         //     'user_id' => Auth::check() ? Auth::user()->id : '',
         // ]);
 
-
-
         Log::info('from Terminable middleware');
     }
 }

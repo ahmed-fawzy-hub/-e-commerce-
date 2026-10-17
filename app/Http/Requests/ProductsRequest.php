@@ -46,7 +46,7 @@ class ProductsRequest extends FormRequest
         return [
             'brand_id.required' => 'you forgot to select the brand',
             'category_id.required' => 'you forgot to select the category',
-            'name.max' => 'you wront to many text inside the name'
+            'name.max' => 'you wront to many text inside the name',
         ];
     }
 }

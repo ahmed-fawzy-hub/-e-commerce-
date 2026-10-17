@@ -10,9 +10,13 @@ use Illuminate\View\Component;
 class BrandDropdown extends Component
 {
     public $brands;
+
     public $product;
+
     public $name;
+
     public $id;
+
     /**
      * Create a new component instance.
      */

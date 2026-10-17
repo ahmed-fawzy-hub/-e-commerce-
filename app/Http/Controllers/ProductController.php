@@ -4,19 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsRequest;
 use App\Jobs\SendNewProductAlert;
-use App\Mail\AddNewProductMail;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTags;
 use App\Models\Tags;
-use App\Models\User;
-use Illuminate\Container\Attributes\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -25,17 +19,21 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+
         return view('Products.index', compact('products'));
     }
+
     public function create()
     {
         $categories = Category::all();
         $brands = Brand::all();
+
         return view('Products.create', compact('categories', 'brands'));
     }
+
     public function store(ProductsRequest $request)
     {
-        $product = new Product();
+        $product = new Product;
         $product->brand_id = $request->brand_id;
         $product->category_id = $request->category_id;
         $product->name = $request->name;
@@ -66,8 +64,6 @@ class ProductController extends Controller
             }
         }
 
-
-
         SendNewProductAlert::dispatch();
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
@@ -78,6 +74,7 @@ class ProductController extends Controller
         Gate::authorize('update', $product);
         $categories = Category::all();
         $brands = Brand::all();
+
         return view('Products.edit', compact('product', 'categories', 'brands'));
     }
 
@@ -124,6 +121,7 @@ class ProductController extends Controller
 
         ProductTags::where('product_id', $product->id)->delete();
         $product->delete();
+
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
@@ -155,6 +153,7 @@ class ProductController extends Controller
             // // ->whereHas('products')
             // ->whereDoesntHave('products')
             ->get();
+
         return $item;
     }
 }

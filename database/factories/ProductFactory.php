@@ -22,24 +22,25 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
-        $name=$this->faker->name();
+        $name = $this->faker->name();
+
         return [
             //
-'brand_id'=>Brand::inRandomOrder()->value('id'),
-'category_id'=>Category::inRandomOrder()->value('id'),
-'name'=>$name,
-'slug'=>Str::slug($name.'-'.uniqid()),
-'regular_price'=>$this->faker->numberBetween(100,9999),
-'sale_price'=>$this->faker->numberBetween(100,9999),
-'sku'=>strtoupper(Str::random(10)),
-'stock_quantity'=>$this->faker->numberBetween(0,100),
-'stock_status'=>$this->faker->randomElement(['instock','outofstock']),
-'featured'=>$this->faker->randomElement(['yes','no']),
-'short_description'=>$this->faker->sentence(10),
-'description'=>$this->faker->paragraph(5),
-'status'=>$this->faker->randomElement(['draft','published']),
-'thumbnail'=>'https://picsum.photos/640/480',
-'created_by'=>User::inRandomOrder()->value('id')??User::factory(),
+            'brand_id' => Brand::inRandomOrder()->value('id'),
+            'category_id' => Category::inRandomOrder()->value('id'),
+            'name' => $name,
+            'slug' => Str::slug($name.'-'.uniqid()),
+            'regular_price' => $this->faker->numberBetween(100, 9999),
+            'sale_price' => $this->faker->numberBetween(100, 9999),
+            'sku' => strtoupper(Str::random(10)),
+            'stock_quantity' => $this->faker->numberBetween(0, 100),
+            'stock_status' => $this->faker->randomElement(['instock', 'outofstock']),
+            'featured' => $this->faker->randomElement(['yes', 'no']),
+            'short_description' => $this->faker->sentence(10),
+            'description' => $this->faker->paragraph(5),
+            'status' => $this->faker->randomElement(['draft', 'published']),
+            'thumbnail' => 'https://picsum.photos/640/480',
+            'created_by' => User::inRandomOrder()->value('id') ?? User::factory(),
         ];
     }
 }
